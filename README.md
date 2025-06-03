@@ -154,6 +154,10 @@ Deep Learning Configuration
   [ctrl]+[b] [up]/[down]/[left]/[right] # change to other pane
   ```
 
+## Python
+* Choose `Python 3.10`.
+* Debug by `import pdb; pdb.set_trace()`.
+
 ## PyTorch
 * Check CUDA version and GPU status by `nvidia-smi`.
 * Install [PyTorch](https://pytorch.org/get-started/locally/) according to the CUDA version.
@@ -165,10 +169,33 @@ Deep Learning Configuration
   import argparse
   parser = argparse.ArgumentParser()
   parser.add_argument("--verbose", action="store_true", default=False, help="whether verbose")
-  parser.add_argument("--batch_size", type=int, default=16, help="batch size")
-  parser.add_argument("--lr", type=float, default=1e-3, help="learning rate")
-  parser.add_argument("--device", type=str, default="cuda", help="pytorch device")
+  parser.add_argument("--batch_size", type=int, required=True, help="batch size")
+  parser.add_argument("--devices", type=str, nargs="+", default=[], help="pytorch device")
   args = parser.parse_args()
+  ```
+* `tyro`.
+  ```bash
+  pip install tyro
+  ```
+  ```python
+  from typing import Tuple
+  import tyro
+  def main(verbose: bool, batch_size: int = 16, devices: Tuple[str, ...] = ()) -> None:
+      pass
+  if __name__ == "__main__":
+      tyro.cli(main)
+  ```
+  ```python
+  from typing import Tuple
+  from dataclasses import dataclass
+  import tyro
+  @dataclass
+  class Config:
+      verbose: bool
+      batch_size: int = 16
+      devices: Tuple[str, ...] = ()
+  if __name__ == "__main__":
+      config = tyro.cli(Config)
   ```
 
 ## WandB
