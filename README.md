@@ -12,13 +12,25 @@ Deep Learning Configuration
   clear # clear command line
   touch <path> # make file
   mkdir <path> # make directory
-  cp <src_path> <dst_path> # copy
+  cp -r <src_path> <dst_path> # copy
   mv <src_path> <dst_path> # move
+  rm -rf <src_path> # remove
   ln -s <src_path> <dst_path> # soft link
   du -h <path> # show disk usage
   df -h <path> # show disk free
-  htop # show table of processes
   sudo apt install <pkg_name> # install package
+  wget <url> -O <dst_path> # web get
+  zip <dst_path>.zip <src_path> # zip
+  unzip <src_path>.zip -d <dst_path> # unzip
+  ... | grep <str> # find in output
+  which ... # find bin path
+  [up]/[down] # use command in history
+  history # command history
+  ps # process status
+  htop # show table of processes
+  kill -9 <pid> # kill process
+  [ctrl]+[c] # cancel process
+  [ctrl]+[z] # pause process
   ```
 * Store `data`, `model`, `software` in big disk, store `code` in small disk, use soft link to connect.
 
@@ -35,6 +47,8 @@ Deep Learning Configuration
     PreferredAuthentications publickey
     IdentityFile "<your_local_priv_key_path>"
   ```
+* Tunneling: Achieved by MobaXterm.
+* X11 forwarding: Achieved by MobaXterm.
 
 ## MobaXterm
 1. Download [MobaXterm](https://mobaxterm.mobatek.net).
@@ -43,11 +57,7 @@ Deep Learning Configuration
 
 ## VSCode
 1. Download [VSCode](https://code.visualstudio.com).
-2. Install extensions.
-   * Remote
-   * Python
-   * Markdown
-   * Todo Tree
+2. Install `Remote` extension.
 3. Remote config by `~/.ssh/config`.
 
 ## Git
@@ -59,8 +69,17 @@ Deep Learning Configuration
   git config user.name "your_name" # config name
   git config user.email "your_email" # config email
   git add <path> # add
+  git commit -m "your_message" # commit
+  git log --all --graph --decorate # history
+  git branch # list branches
+  git checkout -b <br_name> # create branch
+  git remote -vv # list remotes
+  git remote add <name> <url> # add remote
+  git pull # pull
+  git push <name> <local_br_name>:<remote_br_name> # push
   ```
-* GitHub authentication: Add public key.
+* `.gitignore` and `.gitkeep` for ignoring files.
+* GitHub authentication: Add public key on GitHub.
 * Multiple users: Edit ssh config in `~/.ssh/config` as
   ```txt
   Host github-<your_name>
@@ -78,7 +97,10 @@ Deep Learning Configuration
   conda create -n <env_name> python=3.10 # create
   conda activate <env_name> # activate
   conda deactivate # deactivate
-  conda remove -n <env_name> --all # remove
+  conda remove -n <env_name> --all # remove environment
+  conda env list # list environments
+  conda install <pkg_name> -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ # install package with tsinghua source
+  conda uninstall <pkg_name> # uninstall package
   ```
 
 ## Pip
@@ -86,12 +108,96 @@ Deep Learning Configuration
   ```bash
   pip install <pkg_name> -i https://pypi.tuna.tsinghua.edu.cn/simple # install with tsinghua source
   pip install -r requirements.txt # install from file
+  pip uninstall <pkg_name> # uninstall
+  pip list # list packages
   ```
 
 ## Vim
+* Know common commands.
+  ```bash
+  [i] # insert
+  [o] # open a new line below
+  [esc] # return
+  [j] # down
+  [k] # up
+  [h] # left
+  [l] # right
+  [w] # next word
+  [e] # word end
+  [b] # back word
+  [0] # beginning line
+  [$] # end line
+  [ctrl]+[u] # scroll up
+  [ctrl]+[d] # scroll down
+  [gg] # beginning file
+  [G] # end file
+  [:wq] # save and quit
+  [:q!] # quit without save
+  ```
 
 ## Tmux
+* Install by `sudo apt install tmux`.
+* Know common commands.
+  ```bash
+  tmux new -s <name> # create session
+  tmux ls # list sessions
+  tmux a -t <name> # attach session
+  [ctrl]+[b] [d] # detach session
+  [ctrl]+[d] # destory pane, window, session
+  [ctrl]+[b] [[] # scrollback
+  [ctrl]+[b] [c] # create window
+  [ctrl]+[b] [p] # change to previous window
+  [ctrl]+[b] [n] # change to next window
+  [ctrl]+[b] [,] # rename window
+  [ctrl]+[b] ["] # horizonally split pane
+  [ctrl]+[b] [%] # vertically split pane
+  [ctrl]+[b] [up]/[down]/[left]/[right] # change to other pane
+  ```
 
 ## PyTorch
 * Check CUDA version and GPU status by `nvidia-smi`.
 * Install [PyTorch](https://pytorch.org/get-started/locally/) according to the CUDA version.
+* Check GPU available by `torch.cuda.is_available()`.
+
+## Arguments
+* `argparse`.
+  ```python
+  import argparse
+  parser = argparse.ArgumentParser()
+  parser.add_argument("--verbose", action="store_true", default=False, help="whether verbose")
+  parser.add_argument("--batch_size", type=int, default=16, help="batch size")
+  parser.add_argument("--lr", type=float, default=1e-3, help="learning rate")
+  parser.add_argument("--device", type=str, default="cuda", help="pytorch device")
+  args = parser.parse_args()
+  ```
+
+## WandB
+
+## TensorBoard
+
+## Gradio
+```bash
+pip install gradio
+```
+```python
+import gradio as gr
+with gr.Blocks(title="your_title") as demo:
+    gr.Markdown("# Your_Title")
+    with gr.Column():
+        input_images = gr.File(label="Images", file_count="multiple")
+        with gr.Row():
+            schedule = gr.Dropdown(["linear", "cosine"], value="linear", label="Schedule", info="For aligment")
+            niter = gr.Number(value=50, precision=0, minimum=0, maximum=100, label="Iterations", info="For denoising")
+            name = gr.Textbox(label="Name", placeholder="NULL", info="Experiment name")
+            thr = gr.Slider(label="Threshold", value=5, minimum=1, maximum=10, step=1)
+            flag = gr.Checkbox(value=True, label="Mask")
+
+        run_btn = gr.Button("Run")
+
+        output_model = gr.Model3D(label="3D Result")
+        output_gallery = gr.Gallery(label="2D Results", columns=4)
+
+        flag.change(set_flag_fn, inputs=[input_images, flag], outputs=niter)
+        run_btn.click(run_fn, inputs=[input_images, schedule, niter, name, thr, flag], outputs=[output_model, output_gallery])
+demo.launch()
+```
