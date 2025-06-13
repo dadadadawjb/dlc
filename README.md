@@ -95,21 +95,51 @@ Deep Learning Configuration
 * Know common commands.
   ```bash
   conda create -n <env_name> python=3.10 # create
+  conda env create -f environment.yml # create from file
   conda activate <env_name> # activate
   conda deactivate # deactivate
   conda remove -n <env_name> --all # remove environment
   conda env list # list environments
-  conda install <pkg_name> -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ # install package with tsinghua source
+  conda install <pkg_name>=2.0.0 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ # install package with tsinghua source
   conda uninstall <pkg_name> # uninstall package
+  ```
+* `environment.yml`
+  ```yml
+  name: your_env_name
+  channels:
+    - pytorch
+    - nvidia
+    - conda-forge
+    - defaults
+    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+    - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/msys2/
+  dependencies:
+    - python=3.10
+    - pip
+    - pytorch::pytorch=2.0.0
+    - pytorch::torchvision=0.15.0
+    - pip:
+      # no real-time info
+      - numpy>=2.0.0
+      - scipy==1.15.0
+      - tqdm
+      - -i https://pypi.tuna.tsinghua.edu.cn/simple
   ```
 
 ## Pip
 * Know common commands.
   ```bash
-  pip install <pkg_name> -i https://pypi.tuna.tsinghua.edu.cn/simple # install with tsinghua source
+  pip install <pkg_name>==2.0.0 -i https://pypi.tuna.tsinghua.edu.cn/simple # install with tsinghua source
   pip install -r requirements.txt # install from file
   pip uninstall <pkg_name> # uninstall
   pip list # list packages
+  ```
+* `requirements.txt`
+  ```pip
+  numpy>=2.0.0
+  scipy==1.15.0
+  tqdm
   ```
 
 ## Vim
