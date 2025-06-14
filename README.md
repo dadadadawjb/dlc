@@ -20,6 +20,7 @@ Deep Learning Configuration
   df -h <path> # show disk free
   sudo apt install <pkg_name> # install package
   wget <url> -O <dst_path> # web get
+  aria2c -x 16 -s 16 <url> -o <dst_path> # multi-thread download, install by `sudo apt-get install aria2`
   zip <dst_path>.zip <src_path> # zip
   unzip <src_path>.zip -d <dst_path> # unzip
   ... | grep <str> # find in output
