@@ -33,6 +33,10 @@ Deep Learning Configuration
   [ctrl]+[c] # cancel process
   [ctrl]+[z] # pause process
   ```
+* `~/.bashrc`: Set environment variables, renew by `source ~/.bashrc`.
+  ```bash
+  export LD_LIBRARY_PATH=/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+  ```
 * Store `data`, `model`, `software` in big disk, store `code` in small disk, use soft link to connect.
 
 ## SSH
@@ -194,6 +198,8 @@ Deep Learning Configuration
 * Check CUDA version and GPU status by `nvidia-smi`.
 * Install [PyTorch](https://pytorch.org/get-started/locally/) according to the CUDA version.
 * Check GPU available by `torch.cuda.is_available()`.
+* Choose GPU by `CUDA_VISIBLE_DEVICES=0,1 python train.py`.
+* Set cache path in `~/.bashrc` by `export TORCH_HOME=/data/.cache/torch`, default as `~/.cache/torch`.
 
 ## Arguments
 * `argparse`.
@@ -233,6 +239,9 @@ Deep Learning Configuration
 ## WandB
 
 ## TensorBoard
+
+## HuggingFace
+* Set cache hub path in `~/.bashrc` by `export HF_HOME=/data/.cache/huggingface`, default as `~/.cache/huggingface`.
 
 ## Gradio
 ```bash
