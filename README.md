@@ -103,6 +103,7 @@ Deep Learning Configuration
   conda env list # list environments
   conda install <pkg_name>=2.0.0 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ # install package with tsinghua source
   conda uninstall <pkg_name> # uninstall package
+  conda list # list packages
   ```
 * `environment.yml`
   ```yml
