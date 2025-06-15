@@ -7,6 +7,7 @@ Deep Learning Configuration
   ```bash
   ls <path> # list directory
   ll <path> # list long directory
+  tree <path> -a -L <layers> # list directory tree, install by `sudo apt install tree`
   cd <path> # change directory
   pwd # print working directory
   clear # clear command line
@@ -21,6 +22,7 @@ Deep Learning Configuration
   sudo apt install <pkg_name> # install package
   wget <url> -O <dst_path> # web get
   aria2c -x 16 -s 16 <url> -o <dst_path> # multi-thread download, install by `sudo apt-get install aria2`
+  scp -r -P <port> <src_path> <username>@<ip>:<dst_path> -i <your_local_priv_key_path> # secure copy protocol
   zip <dst_path>.zip <src_path> # zip
   unzip <src_path>.zip -d <dst_path> # unzip
   ... | grep <str> # find in output
@@ -36,6 +38,13 @@ Deep Learning Configuration
 * `~/.bashrc`: Set environment variables, renew by `source ~/.bashrc`.
   ```bash
   export LD_LIBRARY_PATH=/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+  ```
+* `run.sh`: Run batch commands by `bash run.sh`.
+  ```bash
+  seqs=(seq1 seq2)
+  for seq in "${seqs[@]}"; do
+      python train.py --name "$seq"
+  done
   ```
 * Store `data`, `model`, `software` in big disk, store `code` in small disk, use soft link to connect.
 
@@ -193,6 +202,13 @@ Deep Learning Configuration
 ## Python
 * Choose `Python 3.10`.
 * Debug by `import pdb; pdb.set_trace()`.
+  ```pdb
+  n: next
+  s: step
+  c: continue
+  l: list
+  p: print
+  ```
 
 ## PyTorch
 * Check CUDA version and GPU status by `nvidia-smi`.
