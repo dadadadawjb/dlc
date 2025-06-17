@@ -156,6 +156,7 @@ Deep Learning Configuration
   scipy==1.15.0
   tqdm
   ```
+* Set cache path in `~/.bashrc` by `export PIP_CACHE_DIR=/data/.cache/pip`, default as `~/.cache/pip`.
 
 ## Vim
 * Know common commands.
