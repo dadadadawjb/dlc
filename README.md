@@ -17,7 +17,7 @@ Deep Learning Configuration
   mv <src_path> <dst_path> # move
   rm -rf <src_path> # remove
   ln -s <src_path> <dst_path> # soft link
-  du -h <path> # show disk usage
+  du -h <path> --max-depth <depthscp> # show disk usage
   df -h <path> # show disk free
   sudo apt install <pkg_name> # install package
   wget <url> -O <dst_path> # web get
@@ -93,7 +93,7 @@ Deep Learning Configuration
   git push <name> <local_br_name>:<remote_br_name> # push
   ```
 * `.gitignore` and `.gitkeep` for ignoring files.
-* GitHub authentication: Add public key on GitHub.
+* GitHub authentication: Add public key on GitHub, check by `ssh -T git@github.com`.
 * Multiple users: Edit ssh config in `~/.ssh/config` as
   ```txt
   Host github-<your_name>
@@ -162,8 +162,10 @@ Deep Learning Configuration
 * Know common commands.
   ```bash
   [i] # insert
+  [a] # append
   [o] # open a new line below
   [esc] # return
+  [dd] # delete line
   [j] # down
   [k] # up
   [h] # left
@@ -173,6 +175,8 @@ Deep Learning Configuration
   [b] # back word
   [0] # beginning line
   [$] # end line
+  [I] # insert beginning line
+  [A] # append end line
   [ctrl]+[u] # scroll up
   [ctrl]+[d] # scroll down
   [gg] # beginning file
