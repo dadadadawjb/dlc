@@ -302,15 +302,33 @@ Deep Learning Configuration
 * Choose GPU by `CUDA_VISIBLE_DEVICES=0,1 python train.py`.
 * Set cache path in `~/.bashrc` by `export TORCH_HOME=/data/.cache/torch`, default as `~/.cache/torch`.
 
-## Arguments
+## Seed
+```python
+import os
+import random
+import numpy as np
+import torch
+def setup_seed(seed:int=42) -> None:
+    random.seed(seed)
+    np.random.seed(seed)
+    os.environ['PYTHONHASHSEED'] = str(seed)
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+    torch.backends.cudnn.deterministic = True
+```
+
+## Args
 * `argparse`.
   ```python
   import argparse
-  parser = argparse.ArgumentParser()
-  parser.add_argument("--verbose", action="store_true", default=False, help="whether verbose")
-  parser.add_argument("--batch_size", type=int, required=True, help="batch size")
-  parser.add_argument("--devices", type=str, nargs="+", default=[], help="pytorch device")
-  args = parser.parse_args()
+  def arg_parse() -> argparse.Namespace:
+      parser = argparse.ArgumentParser()
+      parser.add_argument("--verbose", action="store_true", default=False, help="whether verbose")
+      parser.add_argument("--batch_size", type=int, required=True, help="batch size")
+      parser.add_argument("--devices", type=str, nargs="+", default=[], help="pytorch device")
+      args = parser.parse_args()
+      return args
   ```
 * `tyro`.
   ```bash
@@ -319,27 +337,155 @@ Deep Learning Configuration
   ```python
   from typing import Tuple
   import tyro
-  def main(verbose: bool, batch_size: int = 16, devices: Tuple[str, ...] = ()) -> None:
+  
+  def train(verbose: bool, batch_size: int = 16, devices: Tuple[str, ...] = ()) -> None:
       pass
+  
   if __name__ == "__main__":
-      tyro.cli(main)
+      tyro.cli(train)
   ```
   ```python
   from typing import Tuple
   from dataclasses import dataclass
   import tyro
+  
   @dataclass
   class Config:
       verbose: bool
       batch_size: int = 16
       devices: Tuple[str, ...] = ()
+  
   if __name__ == "__main__":
       config = tyro.cli(Config)
   ```
 
+## Configs
+* `configargparse`.
+  ```bash
+  pip install ConfigArgParse
+  ```
+  ```python
+  import configargparse
+  def config_parse() -> configargparse.Namespace:
+      parser = configargparse.ArgumentParser()
+      parser.add_argument('--config', is_config_file=True, help='config file path')
+      parser.add_argument("--verbose", action="store_true", default=False, help="whether verbose")
+      parser.add_argument("--batch_size", type=int, required=True, help="batch size")
+      parser.add_argument("--devices", type=str, nargs="+", default=[], help="pytorch device")
+      args = parser.parse_args()
+      return args
+  ```
+  ```python
+  # config.txt
+  verbose = False
+  batch_size = 8
+  devices = [cuda:0, cuda:1]
+  ```
+* `json`.
+  ```python
+  import json
+  def load_config(path:str) -> dict:
+      with open(path, 'r', encoding='utf-8') as f:
+          config = json.load(f)
+      return config
+  def save_config(path:str, config:dict) -> None:
+      with open(path, 'w', encoding='utf-8') as f:
+          json.dump(config, f, ensure_ascii=False, indent=4)
+  ```
+  ```json
+  {
+      "verbose": false,
+      "batch_size": 8,
+      "devices": ["cuda:0", "cuda:1"]
+  }
+  ```
+* `yaml`.
+  ```bash
+  pip install PyYAML
+  ```
+  ```python
+  import yaml
+  def load_config(path:str) -> dict:
+      with open(path, 'r', encoding='utf-8') as f:
+          config = yaml.load(f, Loader=yaml.FullLoader)
+      return config
+  def save_config(path:str, config:dict) -> None:
+      with open(path, 'w', encoding='utf-8') as f:
+          yaml.dump(config, f, allow_unicode=True, sort_keys=False)
+  ```
+  ```yaml
+  # config.yaml
+  verbose: false
+  batch_size: 8
+  devices:
+    - cuda:0
+    - cuda:1
+  ```
+* `hydra`.
+  ```bash
+  pip install hydra-core
+  ```
+  ```python
+  import hydra
+  from omegaconf import DictConfig
+
+  @hydra.main(config_path='./configs', config_name='config', version_base='1.2')
+  def train(cfg:DictConfig) -> None:
+      hydra_cfg = hydra.core.hydra_config.HydraConfig.get()
+      output_dir = hydra_cfg['runtime']['output_dir']
+      pass
+
+  if __name__ == '__main__':
+      train()
+  ```
+  ```yaml
+  # configs/config.yaml
+  defaults:
+    - training: config # configs/training/config.yaml
+    - _self_
+  
+  abbr: 'exp0'
+  verbose: False
+  
+  hydra:
+    run:
+      dir: "./outputs/train/${abbr}_${now:%Y_%m_%d_%H_%M_%S}"
+  ```
+
 ## WandB
+```bash
+pip install wandb
+wandb login
+```
+```python
+import wandb
+wandb.init(project="your_proj_name", name="your_exp_name")
+for epoch in range(num_epochs):
+    wandb.log({
+        'Loss/train': train_loss,
+        'Loss/val': val_loss,
+        'Accuracy/val': val_acc,
+        'Input/Image': wandb.Image(image)
+    }, step=epoch)
+wandb.finish()
+```
 
 ## TensorBoard
+```bash
+pip install tensorboard
+```
+```python
+from torch.utils.tensorboard import SummaryWriter
+tb_writer = SummaryWriter(log_dir="your_log_dir")
+for epoch in range(num_epochs):
+    tb_writer.add_scalars('Loss', {'train': train_loss, 'val': val_loss}, epoch)
+    tb_writer.add_scalar('Accuracy/val', val_acc, epoch)
+    tb_writer.add_image('Input/Image', image, epoch)
+tb_writer.close()
+```
+```bash
+tensorboard --logdir=<your_log_dir> --port=6006 # http://localhost:6006
+```
 
 ## HuggingFace
 * Set cache hub path in `~/.bashrc` by `export HF_HOME=/data/.cache/huggingface`, default as `~/.cache/huggingface`.
