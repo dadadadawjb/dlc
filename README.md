@@ -147,6 +147,7 @@ Deep Learning Configuration
   ```bash
   pip install <pkg_name>==2.0.0 -i https://pypi.tuna.tsinghua.edu.cn/simple # install with tsinghua source
   pip install -r requirements.txt # install from file
+  pip install -e <pkg_path>[<extra_name>] # install editable locally
   pip uninstall <pkg_name> # uninstall
   pip list # list packages
   ```
@@ -155,6 +156,85 @@ Deep Learning Configuration
   numpy>=2.0.0
   scipy==1.15.0
   tqdm
+  ```
+* `setup.py`
+  ```python
+  from setuptools import setup, find_packages
+  
+  basics = [
+      'numpy>=2.0.0', 
+      'tqdm', 
+  ]
+  extras = {
+      'dev': [
+          'scipy==1.15.0', 
+      ], 
+      'other': [
+          'pynput', 
+      ], 
+  }
+  extras['all'] = list(set({pkg for pkgs in extras.values() for pkg in pkgs}))
+  
+  setup(
+      name = 'your_pkg_name', 
+      version = '0.0.1', 
+      license = 'MIT', 
+      description = 'your_pkg_description', 
+      author = "your_name", 
+      author_email = "your_email", 
+      maintainer = "your_name", 
+      maintainer_email = "your_email", 
+      url = "your_pkg_url", 
+      packages = find_packages(), 
+      include_package_data = True, 
+      install_requires = basics, 
+      extras_require = extras, 
+      zip_safe = False
+  )
+  ```
+* `pyproject.toml`
+  ```toml
+  [build-system]
+  requires = ["setuptools>=61.0", "wheel"]
+  build-backend = "setuptools.build_meta"
+  
+  [project]
+  name = "your_pkg_name"
+  version = "0.0.1"
+  description = "your_pkg_description"
+  license = { text = "MIT" }
+  authors = [
+    { name = "your_name", email = "your_email" }
+  ]
+  maintainers = [
+    { name = "your_name", email = "your_email" }
+  ]
+  dependencies = [
+    "numpy>=2.0.0", 
+    "tqdm", 
+  ]
+  requires-python = ">=3.7"
+  urls = {
+    "Homepage" = "your_pkg_url"
+  }
+  
+  [project.optional-dependencies]
+  dev = [
+    "scipy==1.15.0",
+  ]
+  other = [
+    "pynput",
+  ]
+  all = [
+    "scipy==1.15.0",
+    "pynput",
+  ]
+  
+  [tool.setuptools]
+  include-package-data = true
+  
+  [tool.setuptools.packages.find]
+  where = ["."]
   ```
 * Set cache path in `~/.bashrc` by `export PIP_CACHE_DIR=/data/.cache/pip`, default as `~/.cache/pip`.
 
