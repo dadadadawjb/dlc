@@ -296,8 +296,11 @@ Deep Learning Configuration
   ```
 
 ## PyTorch
-* Check CUDA version and GPU status by `nvidia-smi`.
-* Install [PyTorch](https://pytorch.org/get-started/locally/) according to the CUDA version.
+* Check CUDA driver version and GPU status by `nvidia-smi`.
+* Install [PyTorch](https://pytorch.org/get-started/locally/) according to the CUDA driver version.
+* `nvcc` CUDA toolkit is needed only to compile cuda programs, check CUDA toolkit version by `nvcc --version`.
+* Install [CUDA Toolkit](https://developer.nvidia.com/cuda-downloads), under `/usr/local/cuda` by default. You can also install by `conda install -c "nvidia/label/cuda-12.4.0" cuda-toolkit` for user only.
+* Set environment variables in `~/.bashrc` by `export CUDA_HOME=/usr/local/cuda`, `export PATH=$CUDA_HOME/bin:$PATH` and `export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH`.
 * Check GPU available by `torch.cuda.is_available()`.
 * Choose GPU by `CUDA_VISIBLE_DEVICES=0,1 python train.py`.
 * Set cache path in `~/.bashrc` by `export TORCH_HOME=/data/.cache/torch`, default as `~/.cache/torch`.
