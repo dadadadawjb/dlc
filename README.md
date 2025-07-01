@@ -44,9 +44,14 @@ Deep Learning Configuration
   ```
 * `run.sh`: Run batch commands by `bash run.sh`.
   ```bash
+  #!/bin/bash
   seqs=(seq1 seq2)
   for seq in "${seqs[@]}"; do
-      python train.py --name "$seq"
+      if [ -e "$seq" ]; then
+          python train.py --path "$seq"
+      else
+          echo "no $seq"
+      fi
   done
   ```
 * Store `data`, `model`, `software` in big disk, store `code` in small disk, use soft link to connect.
