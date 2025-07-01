@@ -23,8 +23,10 @@ Deep Learning Configuration
   wget <url> -O <dst_path> # web get
   aria2c -x 16 -s 16 <url> -o <dst_path> # multi-thread download, install by `sudo apt-get install aria2`
   scp -r -P <port> <src_path> <username>@<ip>:<dst_path> -i <your_local_priv_key_path> # secure copy protocol
-  zip <dst_path>.zip <src_path> # zip
+  zip -r <dst_path>.zip <src_path> # zip
   unzip <src_path>.zip -d <dst_path> # unzip
+  tar -czf <dst_path>.tar.gz <src_path> # tar
+  tar -xzf <src_path>.tar.gz -C <dst_path> # untar
   ... | grep <str> # find in output
   which ... # find bin path
   [up]/[down] # use command in history
