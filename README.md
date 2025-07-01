@@ -149,6 +149,23 @@ Deep Learning Configuration
       - tqdm
       - -i https://pypi.tuna.tsinghua.edu.cn/simple
   ```
+* Know common environment variables.
+  ```bash
+  CONDA_PREFIX=/path/to/miniconda3/envs/env_name # /path/to/miniconda3 for base
+  CONDA_DEFAULT_ENV=env_name
+  CONDA_PYTHON_EXE=/path/to/miniconda3/envs/env_name/bin/python # /path/to/miniconda3/bin/python for base
+  CONDA_EXE=/path/to/miniconda3/bin/conda
+  ```
+* Customize environment activation hook by `$CONDA_PREFIX/etc/conda/activate.d/*.sh` and `$CONDA_PREFIX/etc/conda/deactivate.d/*.sh`.
+  ```bash
+  # $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
+  export OLD_LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
+  export LD_LIBRARY_PATH="$CONDA_PREFIX/lib${LD_LIBRARY_PATH:+:}$LD_LIBRARY_PATH"
+  ```
+  ```bash
+  # $CONDA_PREFIX/etc/conda/deactivate.d/env_vars.sh
+  export LD_LIBRARY_PATH="$OLD_LD_LIBRARY_PATH"
+  ```
 
 ## Pip
 * Know common commands.
