@@ -17,6 +17,7 @@ Deep Learning Configuration
   mv <src_path> <dst_path> # move
   rm -rf <src_path> # remove
   ln -s <src_path> <dst_path> # soft link
+  unlink <path> # unlink
   du -h <path> --max-depth <depthscp> # show disk usage
   df -h <path> # show disk free
   sudo apt install <pkg_name> # install package
