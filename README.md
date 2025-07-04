@@ -144,7 +144,7 @@ Deep Learning Configuration
     - pytorch::torchvision=0.15.0
     - pip:
       # no real-time info
-      - numpy>=2.0.0
+      - numpy>2.0.0,<=2.1.0
       - scipy==1.15.0
       - tqdm
       - -i https://pypi.tuna.tsinghua.edu.cn/simple
@@ -178,7 +178,7 @@ Deep Learning Configuration
   ```
 * `requirements.txt`
   ```pip
-  numpy>=2.0.0
+  numpy>2.0.0,<=2.1.0
   scipy==1.15.0
   tqdm
   ```
@@ -187,7 +187,7 @@ Deep Learning Configuration
   from setuptools import setup, find_packages
   
   basics = [
-      'numpy>=2.0.0', 
+      'numpy>2.0.0,<=2.1.0', 
       'tqdm', 
   ]
   extras = {
@@ -235,7 +235,7 @@ Deep Learning Configuration
     { name = "your_name", email = "your_email" }
   ]
   dependencies = [
-    "numpy>=2.0.0", 
+    "numpy>2.0.0,<=2.1.0", 
     "tqdm", 
   ]
   requires-python = ">=3.7"
@@ -518,6 +518,7 @@ tensorboard --logdir=<your_log_dir> --port=6006 # http://localhost:6006
 
 ## HuggingFace
 * Set cache hub path in `~/.bashrc` by `export HF_HOME=/data/.cache/huggingface`, default as `~/.cache/huggingface`.
+* Set mirror endpoint in `~/.bashrc` by `export HF_ENDPOINT=https://hf-mirror.com`.
 
 ## Gradio
 ```bash
