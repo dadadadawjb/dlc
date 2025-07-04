@@ -319,6 +319,7 @@ Deep Learning Configuration
   l: list
   p: print
   ```
+* Add temporary library finding path by `PYTHONPATH=/path/to/lib python train.py`.
 
 ## PyTorch
 * Check CUDA driver version and GPU status by `nvidia-smi`.
