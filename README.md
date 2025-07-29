@@ -182,6 +182,11 @@ Deep Learning Configuration
   scipy==1.15.0
   tqdm
   ```
+  ```bash
+  # generate requirements.txt
+  pip install pipreqs
+  pipreqs /path/to/project
+  ```
 * `setup.py`
   ```python
   from setuptools import setup, find_packages
