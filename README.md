@@ -450,6 +450,7 @@ def setup_seed(seed:int=42) -> None:
       with open(path, 'w', encoding='utf-8') as f:
           yaml.dump(config, f, allow_unicode=True, sort_keys=False)
   ```
+  
   ```yaml
   # config.yaml
   verbose: false
