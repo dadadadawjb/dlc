@@ -151,6 +151,7 @@ Deep learning configuration.
       - tqdm
       - -i https://pypi.tuna.tsinghua.edu.cn/simple
   ```
+
 * Know common environment variables.
   ```bash
   CONDA_PREFIX=/path/to/miniconda3/envs/env_name # /path/to/miniconda3 for base
@@ -457,6 +458,7 @@ def setup_seed(seed:int=42) -> None:
     - cuda:0
     - cuda:1
   ```
+
 * `hydra`.
   ```bash
   pip install hydra-core
