@@ -1,5 +1,7 @@
 # dlc
-Deep Learning Configuration
+<img src="assets/logo.png" alt="1337c0d3" width="10%" >
+
+Deep learning configuration.
 
 ## Linux
 * Choose `Ubuntu 22.04 LTS`.
@@ -61,7 +63,7 @@ Deep Learning Configuration
 * Server: Generate keys by `ssh-keygen -t ed25519 -C "your_email"`, saved at `~/.ssh/id_ed25519`. You can generate many, just save differently.
 * Server: Authorize local keys by `touch ~/.ssh/authorized_keys` and `echo "your_local_pub_key" >> ~/.ssh/authorized_keys`. You can authorize many, just append new lines.
 * Local: Edit config in `~/.ssh/config` as
-  ```txt
+  ```
   Host <abbr>
     HostName <ip>
     Port <port>
@@ -103,7 +105,7 @@ Deep Learning Configuration
 * `.gitignore` and `.gitkeep` for ignoring files.
 * GitHub authentication: Add public key on GitHub, check by `ssh -T git@github.com`.
 * Multiple users: Edit ssh config in `~/.ssh/config` as
-  ```txt
+  ```
   Host github-<your_name>
     HostName ssh.github.com
     Port 443
@@ -126,7 +128,7 @@ Deep Learning Configuration
   conda uninstall <pkg_name> # uninstall package
   conda list # list packages
   ```
-* `environment.yml`
+* `environment.yml` as
   ```yml
   name: your_env_name
   channels:
@@ -176,8 +178,8 @@ Deep Learning Configuration
   pip uninstall <pkg_name> # uninstall
   pip list # list packages
   ```
-* `requirements.txt`
-  ```pip
+* `requirements.txt` as
+  ```
   numpy>2.0.0,<=2.1.0
   scipy==1.15.0
   tqdm
@@ -187,7 +189,7 @@ Deep Learning Configuration
   pip install pipreqs
   pipreqs /path/to/project
   ```
-* `setup.py`
+* `setup.py` as
   ```python
   from setuptools import setup, find_packages
   
@@ -222,7 +224,7 @@ Deep Learning Configuration
       zip_safe = False
   )
   ```
-* `pyproject.toml`
+* `pyproject.toml` as
   ```toml
   [build-system]
   requires = ["setuptools>=61.0", "wheel"]
@@ -317,7 +319,7 @@ Deep Learning Configuration
 ## Python
 * Choose `Python 3.10`.
 * Debug by `import pdb; pdb.set_trace()`.
-  ```pdb
+  ```
   n: next
   s: step
   c: continue
