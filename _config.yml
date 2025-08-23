@@ -1,0 +1,21 @@
+title: DLC
+description: Deep Learning Configuration
+keywords: "dlc, AI, dl, deep-learning, config, environment"
+author:
+  name: Junbo Wang
+  email: sjtuwjb3589635689@sjtu.edu.cn
+  url: "https://dadadadawjb.github.io"
+
+remote_theme: just-the-docs/just-the-docs
+plugins:
+  - jekyll-remote-theme
+
+logo: "/assets/logo.png"
+favicon_ico: "/assets/logo.png"
+
+search_enabled: true
+
+aux_links:
+  "DLC on GitHub":
+    - "//github.com/dadadadawjb/dlc"
+aux_links_new_tab: true
