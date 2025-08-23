@@ -6,6 +6,7 @@ Deep learning configuration.
 ## Linux
 * Choose `Ubuntu 22.04 LTS`.
 * Know common commands.
+  
   ```bash
   ls <path> # list directory
   ll <path> # list long directory
@@ -40,11 +41,15 @@ Deep learning configuration.
   [ctrl]+[c] # cancel process
   [ctrl]+[z] # pause process
   ```
+  
 * `~/.bashrc`: Set environment variables, renew by `source ~/.bashrc`.
+  
   ```bash
   export LD_LIBRARY_PATH=/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
   ```
+  
 * `run.sh`: Run batch commands by `bash run.sh`.
+  
   ```bash
   #!/bin/bash
   seqs=(seq1 seq2)
@@ -56,6 +61,7 @@ Deep learning configuration.
       fi
   done
   ```
+  
 * Store `data`, `model`, `software` in big disk, store `code` in small disk, use soft link to connect.
 
 ## SSH
@@ -63,6 +69,7 @@ Deep learning configuration.
 * Server: Generate keys by `ssh-keygen -t ed25519 -C "your_email"`, saved at `~/.ssh/id_ed25519`. You can generate many, just save differently.
 * Server: Authorize local keys by `touch ~/.ssh/authorized_keys` and `echo "your_local_pub_key" >> ~/.ssh/authorized_keys`. You can authorize many, just append new lines.
 * Local: Edit config in `~/.ssh/config` as
+  
   ```
   Host <abbr>
     HostName <ip>
@@ -71,6 +78,7 @@ Deep learning configuration.
     PreferredAuthentications publickey
     IdentityFile "<your_local_priv_key_path>"
   ```
+  
 * Tunneling: Achieved by MobaXterm.
 * X11 forwarding: Achieved by MobaXterm.
 
@@ -86,6 +94,7 @@ Deep learning configuration.
 
 ## Git
 * Know common commands.
+  
   ```bash
   git init -b main # initialize
   git clone <url> # clone
@@ -102,9 +111,11 @@ Deep learning configuration.
   git pull # pull
   git push <name> <local_br_name>:<remote_br_name> # push
   ```
+  
 * `.gitignore` and `.gitkeep` for ignoring files.
 * GitHub authentication: Add public key on GitHub, check by `ssh -T git@github.com`.
 * Multiple users: Edit ssh config in `~/.ssh/config` as
+  
   ```
   Host github-<your_name>
     HostName ssh.github.com
@@ -117,6 +128,7 @@ Deep learning configuration.
 ## Conda
 * Choose [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install).
 * Know common commands.
+  
   ```bash
   conda create -n <env_name> python=3.10 # create
   conda env create -f environment.yml # create from file
@@ -128,7 +140,9 @@ Deep learning configuration.
   conda uninstall <pkg_name> # uninstall package
   conda list # list packages
   ```
+  
 * `environment.yml` as
+  
   ```yml
   name: your_env_name
   channels:
@@ -151,20 +165,24 @@ Deep learning configuration.
       - tqdm
       - -i https://pypi.tuna.tsinghua.edu.cn/simple
   ```
-
+  
 * Know common environment variables.
+  
   ```bash
   CONDA_PREFIX=/path/to/miniconda3/envs/env_name # /path/to/miniconda3 for base
   CONDA_DEFAULT_ENV=env_name
   CONDA_PYTHON_EXE=/path/to/miniconda3/envs/env_name/bin/python # /path/to/miniconda3/bin/python for base
   CONDA_EXE=/path/to/miniconda3/bin/conda
   ```
+  
 * Customize environment activation hook by `$CONDA_PREFIX/etc/conda/activate.d/*.sh` and `$CONDA_PREFIX/etc/conda/deactivate.d/*.sh`.
+  
   ```bash
   # $CONDA_PREFIX/etc/conda/activate.d/env_vars.sh
   export OLD_LD_LIBRARY_PATH="$LD_LIBRARY_PATH"
   export LD_LIBRARY_PATH="$CONDA_PREFIX/lib${LD_LIBRARY_PATH:+:}$LD_LIBRARY_PATH"
   ```
+  
   ```bash
   # $CONDA_PREFIX/etc/conda/deactivate.d/env_vars.sh
   export LD_LIBRARY_PATH="$OLD_LD_LIBRARY_PATH"
@@ -172,6 +190,7 @@ Deep learning configuration.
 
 ## Pip
 * Know common commands.
+  
   ```bash
   pip install <pkg_name>==2.0.0 -i https://pypi.tuna.tsinghua.edu.cn/simple # install with tsinghua source
   pip install -r requirements.txt # install from file
@@ -179,18 +198,23 @@ Deep learning configuration.
   pip uninstall <pkg_name> # uninstall
   pip list # list packages
   ```
+  
 * `requirements.txt` as
+  
   ```
   numpy>2.0.0,<=2.1.0
   scipy==1.15.0
   tqdm
   ```
+  
   ```bash
   # generate requirements.txt
   pip install pipreqs
   pipreqs /path/to/project
   ```
+  
 * `setup.py` as
+  
   ```python
   from setuptools import setup, find_packages
   
@@ -225,7 +249,9 @@ Deep learning configuration.
       zip_safe = False
   )
   ```
+  
 * `pyproject.toml` as
+  
   ```toml
   [build-system]
   requires = ["setuptools>=61.0", "wheel"]
@@ -269,10 +295,12 @@ Deep learning configuration.
   [tool.setuptools.packages.find]
   where = ["."]
   ```
+  
 * Set cache path in `~/.bashrc` by `export PIP_CACHE_DIR=/data/.cache/pip`, default as `~/.cache/pip`.
 
 ## Vim
 * Know common commands.
+  
   ```bash
   [i] # insert
   [a] # append
@@ -301,6 +329,7 @@ Deep learning configuration.
 ## Tmux
 * Install by `sudo apt install tmux`.
 * Know common commands.
+  
   ```bash
   tmux new -s <name> # create session
   tmux ls # list sessions
@@ -320,6 +349,7 @@ Deep learning configuration.
 ## Python
 * Choose `Python 3.10`.
 * Debug by `import pdb; pdb.set_trace()`.
+  
   ```
   n: next
   s: step
@@ -327,6 +357,7 @@ Deep learning configuration.
   l: list
   p: print
   ```
+  
 * Add temporary library finding path by `PYTHONPATH=/path/to/lib python train.py`.
 
 ## PyTorch
@@ -357,6 +388,7 @@ def setup_seed(seed:int=42) -> None:
 
 ## Args
 * `argparse`.
+  
   ```python
   import argparse
   def arg_parse() -> argparse.Namespace:
@@ -367,10 +399,13 @@ def setup_seed(seed:int=42) -> None:
       args = parser.parse_args()
       return args
   ```
+  
 * `tyro`.
+  
   ```bash
   pip install tyro
   ```
+  
   ```python
   from typing import Tuple
   import tyro
@@ -381,6 +416,7 @@ def setup_seed(seed:int=42) -> None:
   if __name__ == "__main__":
       tyro.cli(train)
   ```
+  
   ```python
   from typing import Tuple
   from dataclasses import dataclass
@@ -398,9 +434,11 @@ def setup_seed(seed:int=42) -> None:
 
 ## Configs
 * `configargparse`.
+  
   ```bash
   pip install ConfigArgParse
   ```
+  
   ```python
   import configargparse
   def config_parse() -> configargparse.Namespace:
@@ -412,13 +450,16 @@ def setup_seed(seed:int=42) -> None:
       args = parser.parse_args()
       return args
   ```
+  
   ```python
   # config.txt
   verbose = False
   batch_size = 8
   devices = [cuda:0, cuda:1]
   ```
+  
 * `json`.
+  
   ```python
   import json
   def load_config(path:str) -> dict:
@@ -429,6 +470,7 @@ def setup_seed(seed:int=42) -> None:
       with open(path, 'w', encoding='utf-8') as f:
           json.dump(config, f, ensure_ascii=False, indent=4)
   ```
+  
   ```json
   {
       "verbose": false,
@@ -436,10 +478,13 @@ def setup_seed(seed:int=42) -> None:
       "devices": ["cuda:0", "cuda:1"]
   }
   ```
+  
 * `yaml`.
+  
   ```bash
   pip install PyYAML
   ```
+  
   ```python
   import yaml
   def load_config(path:str) -> dict:
@@ -461,9 +506,11 @@ def setup_seed(seed:int=42) -> None:
   ```
 
 * `hydra`.
+  
   ```bash
   pip install hydra-core
   ```
+  
   ```python
   import hydra
   from omegaconf import DictConfig
@@ -477,6 +524,7 @@ def setup_seed(seed:int=42) -> None:
   if __name__ == '__main__':
       train()
   ```
+  
   ```yaml
   # configs/config.yaml
   defaults:
@@ -496,6 +544,7 @@ def setup_seed(seed:int=42) -> None:
 pip install wandb
 wandb login
 ```
+
 ```python
 import wandb
 wandb.init(project="your_proj_name", name="your_exp_name")
@@ -513,6 +562,7 @@ wandb.finish()
 ```bash
 pip install tensorboard
 ```
+
 ```python
 from torch.utils.tensorboard import SummaryWriter
 tb_writer = SummaryWriter(log_dir="your_log_dir")
@@ -522,6 +572,7 @@ for epoch in range(num_epochs):
     tb_writer.add_image('Input/Image', image, epoch)
 tb_writer.close()
 ```
+
 ```bash
 tensorboard --logdir=<your_log_dir> --port=6006 # http://localhost:6006
 ```
@@ -534,6 +585,7 @@ tensorboard --logdir=<your_log_dir> --port=6006 # http://localhost:6006
 ```bash
 pip install gradio
 ```
+
 ```python
 import gradio as gr
 with gr.Blocks(title="your_title") as demo:
