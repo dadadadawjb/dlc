@@ -368,16 +368,6 @@ Deep learning configuration.
 
 ## Python
 * Choose `Python 3.10`.
-* Debug by `import pdb; pdb.set_trace()`.
-  
-  ```
-  n: next
-  s: step
-  c: continue
-  l: list
-  p: print
-  ```
-  
 * Add temporary library finding path by `PYTHONPATH=/path/to/lib python train.py`.
 
 ## PyTorch
@@ -580,6 +570,39 @@ def setup_seed(seed:int=42) -> None:
   hydra:
     run:
       dir: "./outputs/train/${abbr}_${now:%Y_%m_%d_%H_%M_%S}"
+  ```
+
+## Debug
+* `import pdb; pdb.set_trace()`.
+  
+  ```
+  n: next
+  s: step
+  c: continue
+  l: list
+  p: print
+  ```
+  
+* `rich`.
+
+  ```bash
+  pip install rich
+  ```
+
+  ```python
+  import torch
+  from rich import print # pretty print
+  from rich import inspect # inspect types, values, properties and methods
+  from rich.traceback import install as install_traceback # pretty traceback
+  install_traceback(show_locals=True, suppress=[torch])
+
+  my_dict = {
+      'verbose': True,
+      'batch_size': 16,
+      'devices': ['cuda:0', 'cuda:1']
+  }
+  print("[i]Hello[/i], [bold red]World[/bold red]!", ":thumbs_up:", my_dict)
+  inspect(my_dict, methods=True)
   ```
 
 ## WandB
