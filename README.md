@@ -18,6 +18,7 @@ Deep learning configuration.
 * [Seed](#seed)
 * [Args](#args)
 * [Configs](#configs)
+* [Debug](#debug)
 * [WandB](#wandb)
 * [TensorBoard](#tensorboard)
 * [HuggingFace](#huggingface)
