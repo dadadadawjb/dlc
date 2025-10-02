@@ -418,6 +418,8 @@ def setup_seed(seed:int=42) -> None:
       parser.add_argument("--devices", type=str, nargs="+", default=[], help="pytorch device")
       args = parser.parse_args()
       return args
+  args = arg_parse()
+  print(args.verbose)
   ```
   
 * `tyro`.
@@ -431,7 +433,7 @@ def setup_seed(seed:int=42) -> None:
   import tyro
   
   def train(verbose: bool, batch_size: int = 16, devices: Tuple[str, ...] = ()) -> None:
-      pass
+      print(verbose)
   
   if __name__ == "__main__":
       tyro.cli(train)
@@ -450,6 +452,27 @@ def setup_seed(seed:int=42) -> None:
   
   if __name__ == "__main__":
       config = tyro.cli(Config)
+      print(config.verbose)
+  ```
+
+* `tap`
+
+  ```bash
+  pip install typed-argument-parser
+  ```
+
+  ```python
+  from typing import Tuple
+  from tap import Tap
+
+  class SimpleArgumentParser(Tap):
+      verbose: bool # whether verbose
+      batch_size: int = 16 # batch size
+      devices: Tuple[str, ...] = () # pytorch device
+
+  if __name__ == "__main__":
+      args = SimpleArgumentParser().parse_args()
+      print(args.verbose)
   ```
 
 ## Configs
