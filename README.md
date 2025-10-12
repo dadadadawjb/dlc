@@ -131,6 +131,8 @@ Deep learning configuration.
   git remote add <name> <url> # add remote
   git pull # pull
   git push <name> <local_br_name>:<remote_br_name> # push
+  git stash push -u -m "your_message" # stash local modification
+  git stash pop # pop stash
   ```
   
 * `.gitignore` and `.gitkeep` for ignoring files.
