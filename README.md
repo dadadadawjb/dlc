@@ -148,6 +148,21 @@ Deep learning configuration.
     IdentityFile "<your_priv_key_path>"
   ```
 
+* `git-filter-repo` as
+
+  ```bash
+  git install git-filter-repo # install
+  git filter-repo --path <file_or_dir> --invert-paths --force # remove files
+  git filter-repo --replace-text replacements.txt --force # replace codes
+  ```
+
+  with `replacements.txt` as
+
+  ```txt
+  foo==>bar
+  regex:foo(?:\r?\n)?==>
+  ```
+
 ## Conda
 * Choose [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install).
 * Know common commands.
