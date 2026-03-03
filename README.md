@@ -387,6 +387,7 @@ Deep learning configuration.
 ## Python
 * Choose `Python 3.10`.
 * Add temporary library finding path by `PYTHONPATH=/path/to/lib python train.py`.
+* Cell run by `# %% cell_name` for vscode/pycharm.
 
 ## PyTorch
 * Check CUDA driver version and GPU status by `nvidia-smi`.
