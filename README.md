@@ -617,6 +617,20 @@ def setup_seed(seed:int=42) -> None:
   l: list
   p: print
   ```
+
+* `debugpy`.
+
+  ```bash
+  pip install debugpy
+  ```
+
+  ```python
+  import debugpy
+  debugpy.listen(("0.0.0.0", 5678))
+  print("Waiting for debugger attach...")
+  debugpy.wait_for_client() # vscode remote debug
+  print("Debugger attached!!!")
+  ```
   
 * `rich`.
 
