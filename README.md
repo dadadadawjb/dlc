@@ -165,11 +165,25 @@ Deep learning configuration.
 
 ## Conda
 * Choose [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install).
+* Use `mamba` solver by
+
+  ```bash
+  conda config --set solver libmamba
+  ```
+  
+* Use `conda-forge` channel by
+
+  ```bash
+  conda config --add channels conda-forge
+  conda config --set channel_priority strict
+  ```
+  
 * Know common commands.
   
   ```bash
   conda create -n <env_name> python=3.10 # create
-  conda env create -f environment.yml # create from file
+  conda env create -f environment.yml/env.lock # create from file
+  conda create -n <env_name> --clone <old_env_name> # clone environment
   conda activate <env_name> # activate
   conda deactivate # deactivate
   conda remove -n <env_name> --all # remove environment
@@ -177,6 +191,8 @@ Deep learning configuration.
   conda install <pkg_name>=2.0.0 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ # install package with tsinghua source
   conda uninstall <pkg_name> # uninstall package
   conda list # list packages
+  conda env export > environment.yml # export package list
+  conda list --explicit > env.lock # export package lock
   ```
   
 * `environment.yml` as
