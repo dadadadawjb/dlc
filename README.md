@@ -129,10 +129,15 @@ Deep learning configuration.
   git checkout -b <br_name> # create branch
   git remote -vv # list remotes
   git remote add <name> <url> # add remote
+  git remote set-url <name> <url> # edit remote
   git pull # pull
-  git push <name> <local_br_name>:<remote_br_name> # push
+  git push -u <name> <local_br_name>:<remote_br_name> # push
+  # to different branch
   git stash push -u -m "your_message" # stash local modification
   git stash pop # pop stash
+  # with different branches or different users
+  git worktree add ../<repo_name>.<feat_name> <br_name> # create worktree
+  git worktree remove ../<repo_name>.<feat_name> # remove worktree
   ```
   
 * `.gitignore` and `.gitkeep` for ignoring files.
