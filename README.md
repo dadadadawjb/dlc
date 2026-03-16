@@ -133,6 +133,7 @@ Deep learning configuration.
   git pull # pull
   git push -u <name> <local_br_name>:<remote_br_name> # push
   # to different branch
+  git stash list
   git stash push -u -m "your_message" # stash local modification
   git stash pop # pop stash
   # with different branches or different users
