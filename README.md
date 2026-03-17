@@ -47,7 +47,7 @@ Deep learning configuration.
   sudo apt install <pkg_name> # install package
   wget <url> -O <dst_path> # web get
   aria2c -x 16 -s 16 <url> -o <dst_path> # multi-thread download, install by `sudo apt-get install aria2`
-  scp -r -P <port> <src_path> <username>@<ip>:<dst_path> -i <your_local_priv_key_path> # secure copy protocol
+  rsync -avz --progress -e "ssh -p <port>" <src_path> <username>@<ip>:<dst_path> # remote sync
   zip -r <dst_path>.zip <src_path> # zip
   unzip <src_path>.zip -d <dst_path> # unzip
   tar -czf <dst_path>.tar.gz <src_path> # tar
