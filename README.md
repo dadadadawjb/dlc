@@ -11,6 +11,7 @@ Deep learning configuration.
 * [Git](#git)
 * [Conda](#conda)
 * [Pip](#pip)
+* [Uv](#uv)
 * [Vim](#vim)
 * [Tmux](#tmux)
 * [Python](#python)
@@ -170,32 +171,20 @@ Deep learning configuration.
   ```
 
 ## Conda
-* Choose [Miniconda](https://www.anaconda.com/docs/getting-started/miniconda/install).
-* Use `mamba` solver by
-
-  ```bash
-  conda config --set solver libmamba
-  ```
-  
-* Use `conda-forge` channel by
-
-  ```bash
-  conda config --add channels conda-forge
-  conda config --set channel_priority strict
-  ```
+* Choose [Miniforge3](https://github.com/conda-forge/miniforge#install).
   
 * Know common commands.
   
   ```bash
-  conda create -n <env_name> python=3.10 # create
-  conda env create -f environment.yml/env.lock # create from file
+  mamba create -n <env_name> python=3.10 # create
+  mamba env create -f environment.yml/env.lock # create from file
   conda create -n <env_name> --clone <old_env_name> # clone environment
   conda activate <env_name> # activate
   conda deactivate # deactivate
-  conda remove -n <env_name> --all # remove environment
+  mamba remove -n <env_name> --all # remove environment
   conda env list # list environments
-  conda install <pkg_name>=2.0.0 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ # install package with tsinghua source
-  conda uninstall <pkg_name> # uninstall package
+  mamba install <pkg_name>=2.0.0 -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/ # install package with tsinghua source
+  mamba remove <pkg_name> # remove package
   conda list # list packages
   conda env export > environment.yml # export package list
   conda list --explicit > env.lock # export package lock
@@ -357,6 +346,22 @@ Deep learning configuration.
   ```
   
 * Set cache path in `~/.bashrc` by `export PIP_CACHE_DIR=/data/.cache/pip`, default as `~/.cache/pip`.
+* Install shared commands/apps by `pipx`, which can be installed by `sudo apt install pipx && pipx ensurepath`.
+
+## Uv
+* [Install](https://docs.astral.sh/uv/getting-started/installation/).
+* Know common commands.
+
+  ```bash
+  uv venv --python 3.10 # create virtual environment
+  source .venv/bin/activate # activate virtual environment, seldom needed
+  uv pip install/uninstall <pkg_name> # install/uninstall libraries
+  uv run run.py # run python
+  uv init # initialize project, new `pyproject.toml`
+  uv add <pkg_name>==2.0.0 # install, add, lock
+  uv remove <pkg_name> # uninstsall, remove, delock
+  uv sync # syncronize environment
+  ```
 
 ## Vim
 * Know common commands.
