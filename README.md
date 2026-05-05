@@ -774,3 +774,12 @@ demo.launch()
 
   \junbo{Good job!}
   ```
+
+  ```tex
+  % custom color
+  \usepackage{xcolor}
+  \definecolor{myblue}{RGB}{66,133,244}
+  \definecolor{myred}{RGB}{234,67,53}
+  \definecolor{myyellow}{RGB}{251,188,4}
+  \definecolor{mygreen}{RGB}{52,168,83}
+  ```
