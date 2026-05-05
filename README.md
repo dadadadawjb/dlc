@@ -24,6 +24,7 @@ Deep learning configuration.
 * [TensorBoard](#tensorboard)
 * [HuggingFace](#huggingface)
 * [Gradio](#gradio)
+* [LaTex](#latex)
 
 ## Linux
 * Choose `Ubuntu 22.04 LTS`.
@@ -172,7 +173,6 @@ Deep learning configuration.
 
 ## Conda
 * Choose [Miniforge3](https://github.com/conda-forge/miniforge#install).
-  
 * Know common commands.
   
   ```bash
@@ -734,3 +734,43 @@ with gr.Blocks(title="your_title") as demo:
         run_btn.click(run_fn, inputs=[input_images, schedule, niter, name, thr, flag], outputs=[output_model, output_gallery])
 demo.launch()
 ```
+
+## LaTex
+* Use [OverLeaf](https://www.overleaf.com/).
+* Know useful commands.
+
+  ```tex
+  % clever reference
+  \usepackage{hyperref}
+  \usepackage{cleveref}
+  \crefname{figure}{figure}{figures}
+  \Crefname{figure}{Fig.}{Figs.}
+  \crefname{table}{table}{tables}
+  \Crefname{table}{Tab.}{Tabs.}
+  \crefname{section}{section}{sections}
+  \Crefname{section}{Sec.}{Secs.}
+  \crefname{subsection}{section}{sections}
+  \Crefname{subsection}{Sec.}{Secs.}
+  \crefname{subsubsection}{section}{sections}
+  \Crefname{subsubsection}{Sec.}{Secs.}
+  \crefname{equation}{equation}{equations}
+  \Crefname{equation}{Eq.}{Eqs.}
+
+  \cref{sec:label}
+  \Cref{sec:label}
+  ```
+
+  ```tex
+  % unify term
+  \usepackage{xspace}
+  \newcommand{\algoname}{ResNet\xspace}
+
+  \algoname
+  ```
+
+  ```tex
+  % comment
+  \newcommand{\junbo}[1]{\textcolor{red}{[Junbo: #1]}}
+
+  \junbo{Good job!}
+  ```
