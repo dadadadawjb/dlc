@@ -24,6 +24,7 @@ Deep learning configuration.
 * [TensorBoard](#tensorboard)
 * [HuggingFace](#huggingface)
 * [Gradio](#gradio)
+* [AI](#ai)
 * [LaTex](#latex)
 
 ## Linux
@@ -734,6 +735,31 @@ with gr.Blocks(title="your_title") as demo:
         run_btn.click(run_fn, inputs=[input_images, schedule, niter, name, thr, flag], outputs=[output_model, output_gallery])
 demo.launch()
 ```
+
+## AI
+* Use [Claude Code](https://claude.com/product/claude-code), [Codex](https://chatgpt.com/codex/), [Cursor](https://cursor.com/).
+* `AGENTS.md` as 
+
+  ```md
+  # Agent Guide
+
+  ## Project Overview
+  What does this project do? TODO
+  Which languages and libraries does this repo use? TODO
+
+  ## Maintenance Rules
+  - Whenever the code structure is changed, added to, or deleted from, update the "Code Structure" and "Important Files" sections in this file at the same time.
+  - Whenever the codes are modified, check whether README.md needs updates for user-facing setup.
+
+  ## Code Structure
+  TODO
+
+  ## Important Files
+  TODO
+
+  ## Running
+  TODO
+  ```
 
 ## LaTex
 * Use [OverLeaf](https://www.overleaf.com/).
