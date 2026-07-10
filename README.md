@@ -737,6 +737,39 @@ demo.launch()
 ```
 
 ## AI
+* Use [ChatGPT](https://chatgpt.com/).
+* Instructions as 
+
+  ```md
+  # Guide
+
+  ## 当我要你介绍/总结某一篇论文时
+  - 中文告诉我：
+    1. 论文研究的问题属于什么领域/类别/方向/任务，解决的问题具体是什么？
+    2. 为什么之前的方法解决不了？
+    3. 作者真正的新idea只有哪几个？
+    4. 哪个实验最关键，哪个结果最关键？
+    5. 如果我是审稿人，会质疑什么？
+    6. 如果我是作者，下一篇工作可以改进什么？
+    7. 参考我当前做的研究项目或者我整体的研究方向，我可以借鉴什么？
+  - 英文输出总结 (参考[之前总结](https://dadadadawjb.github.io/honors/))：
+    1. Project Name and Abbreviation (作者称呼的方法名字全称和缩写，如果作者没有自己取名你可以按照理解取一个)
+    2. Problem and Position (解决了什么问题，在这个领域发展历史上的位置是什么)
+    3. Method Overview (一句话总结最核心的解决方法/研究洞见)
+    4. Results (一句话总结最核心的实验结果)
+    5. Method Details (有逻辑/结构/层次地分点介绍解决方法)
+
+  ## 当我要你调研某一领域/类别/方向/任务时
+  - 中文告诉我：把这些论文分为不同技术路线，分别介绍这些技术路线，介绍这些技术路线的区别，介绍每一技术路线代表论文
+  - 英文输出总结：可进入论文的Related Work段落
+
+  ## 当我要你审稿某一论文时
+  1. 先按照[当我要你介绍/总结某一篇论文时](#当我要你介绍/总结某一篇论文时)那里中文告诉我介绍一下论文。
+  2. 然后对文章进行(1,2,3,4,5)打分：Overall Recommendation, Paper Contribution, Technical Quality, Originality, Thoroughness of Results, Clarity of Presentation, Adequacy of Citations, Relevance to the Field。
+  3. 然后用英文输出一段Summary: The main contribution of this work is to propose xxx(领域/类别/方向/任务) method called xxx(作者称呼的方法名字), which xxx(解决了什么具体问题/相比之前方法有什么新的优点). It consists three components: xxx(一小句话介绍每一模块做法和功能). Extensive evaluations across xxx(实验描述) demonstrate that xxx(实验结果).
+  4. 然后用英文分点输出Strengths和Weaknesses，并针对模糊的地方分点提出Questions。
+  ```
+  
 * Use [Claude Code](https://claude.com/product/claude-code), [Codex](https://chatgpt.com/codex/), [Cursor](https://cursor.com/).
 * `AGENTS.md` as 
 
